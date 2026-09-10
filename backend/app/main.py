@@ -30,7 +30,7 @@ from .template_library import ADDITIONAL_TEMPLATES, ADDITIONAL_TEMPLATE_MAP
 
 APP_NAME = "Aurelia Contract Studio"
 load_dotenv()
-DATABASE_URL = os.getenv("DATABASE_URL", "")
+DATABASE_URL = os.getenv("DATABASE_URL", "").strip('"').strip("'")
 ASSET_DIR = Path(__file__).resolve().parent / "assets"
 NAVY = colors.HexColor("#102f63")
 TEXT = colors.HexColor("#25252b")
