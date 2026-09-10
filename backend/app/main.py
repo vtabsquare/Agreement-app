@@ -689,6 +689,17 @@ def update_agreement(aid: int, x: AgreementUpdate):
     version=(a.get("version") or 1)+1; now=now_iso(); c=db(); cur=c.cursor(); cur.execute("UPDATE agreements SET content=%s,status=%s,title=%s,version=%s,updated_at=%s WHERE id=%s",(content,status,title,version,now,aid)); cur.execute("INSERT INTO audit_logs(agreement_id,action,details,created_at) VALUES(%s,%s,%s,%s)",(aid,"Updated",f"Saved version {version}",now)); c.commit(); c.close(); return {"ok":True,"version":version}
 
 
+@app.delete("/api/agreements/{aid}")
+def delete_agreement(aid: int):
+    a=one("SELECT id FROM agreements WHERE id=?",(aid,))
+    if not a: raise HTTPException(404,"Agreement not found")
+    c=db(); cur=c.cursor()
+    cur.execute("DELETE FROM audit_logs WHERE agreement_id=%s",(aid,))
+    cur.execute("DELETE FROM agreements WHERE id=%s",(aid,))
+    c.commit(); c.close()
+    return {"ok":True}
+
+
 def draw_contact_block(canvas):
     canvas.setFillColor(colors.white)
     canvas.setFont("Helvetica",6.3)

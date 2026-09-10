@@ -231,13 +231,13 @@ FIXED_BID_BODY = """[[H1]]1. Fixed Bid Project
 Use when the scope, deliverables and acceptance criteria can be sufficiently defined up front and the Service Provider commits to deliver the agreed scope for a fixed fee, subject to assumptions, dependencies and change control.
 [[TABLE]]
 Variable || Value / Template
-{{PROJECT_TYPE}} || Fixed Bid
-{{FIXED_FEE}} || {{FIXED_FEE}} {{CURRENCY}}
-{{PROJECT_START_DATE}} || {{PROJECT_START_DATE}}
-{{PROJECT_END_DATE}} || {{PROJECT_END_DATE}}
-{{PAYMENT_SCHEDULE}} || {{PAYMENT_SCHEDULE}}
-{{ACCEPTANCE_CRITERIA}} || {{ACCEPTANCE_CRITERIA}}
-{{CHANGE_CONTROL_THRESHOLD}} || {{CHANGE_CONTROL_THRESHOLD}}
+Project Type || Fixed Bid
+Fixed Fee || {{FIXED_FEE}} {{CURRENCY}}
+Project Start Date || {{PROJECT_START_DATE}}
+Project End Date || {{PROJECT_END_DATE}}
+Payment Schedule || {{PAYMENT_SCHEDULE}}
+Acceptance Criteria || {{ACCEPTANCE_CRITERIA}}
+Change Control Threshold || {{CHANGE_CONTROL_THRESHOLD}}
 [[/TABLE]]
 
 Commercial clause: In consideration for the defined scope, the Client will pay a fixed fee of {{FIXED_FEE}} {{CURRENCY}}, invoiced according to {{PAYMENT_SCHEDULE}}. The fixed fee is based on the assumptions and dependencies in this SOW. Material changes, delayed Client dependencies or requirements outside the agreed scope will be managed through Change Control and may affect fees or dates."""
@@ -259,13 +259,13 @@ TM_BODY = """[[H1]]1. Time & Material (T&M) Project
 Use when work is delivered based on actual approved effort at agreed rates and the exact volume or backlog may evolve.
 [[TABLE]]
 Variable || Value / Template
-{{PROJECT_TYPE}} || Time & Material
-{{RATE_CARD_REFERENCE}} || {{RATE_CARD_REFERENCE}}
-{{BILLING_UNIT}} || Hourly / Daily / Monthly
-{{BILLING_FREQUENCY}} || {{BILLING_FREQUENCY}}
-{{TIMESHEET_APPROVER}} || {{TIMESHEET_APPROVER}}
-{{MONTHLY_CAP}} || {{MONTHLY_CAP}} (optional)
-{{EXPENSE_POLICY}} || {{EXPENSE_POLICY}}
+Project Type || Time & Material
+Rate Card Reference || {{RATE_CARD_REFERENCE}}
+Billing Unit || Hourly / Daily / Monthly
+Billing Frequency || {{BILLING_FREQUENCY}}
+Timesheet Approver || {{TIMESHEET_APPROVER}}
+Monthly Cap || {{MONTHLY_CAP}} (optional)
+Expense Policy || {{EXPENSE_POLICY}}
 [[/TABLE]]
 
 Commercial clause: Fees are calculated using actual approved time multiplied by the applicable rates in {{RATE_CARD_REFERENCE}}. Timesheets will be submitted {{TIMESHEET_FREQUENCY}} and reviewed by {{TIMESHEET_APPROVER}}. Unless disputed with reasonable detail within {{TIMESHEET_REVIEW_DAYS}} business days, approved timesheets will form the basis for invoicing. Any budget estimate is a planning estimate unless expressly stated as a cap."""
