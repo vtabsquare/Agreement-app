@@ -297,13 +297,13 @@ def init_db():
             ("Client","Sample Client","Sample Client Private Limited","Client Signatory","client@example.com","","Chennai, Tamil Nadu","",now)
         )
     docs = [
-        ("POLICY","Policy Agreement","Approved policy agreement template replicated from the supplied VTAB Square Policy Agreement Letter.","policy",json.dumps(POLICY_SCHEMA),POLICY_BODY,now,"1.7.0",json.dumps({"source":"Policy Agreement PDF","shell":"VTAB Square / Siroco","page_size":"A4"})),
-        ("NDA","Client Engagement NDA","Approved Mutual NDA template derived from the complete parameterized Client Engagement Agreement / NDA pack.","nda",json.dumps(NDA_SCHEMA),NDA_BODY,now,"1.7.0",json.dumps({"source":"Parameterized Client Engagement NDA pack","shell":"VTAB Square / Siroco","page_size":"A4"})),
+        ("POLICY","Policy Agreement","Approved policy agreement template replicated from the supplied VTAB Square Policy Agreement Letter.","policy",json.dumps(POLICY_SCHEMA),POLICY_BODY,now,"1.7.1",json.dumps({"source":"Policy Agreement PDF","shell":"VTAB Square / Siroco","page_size":"A4"})),
+        ("NDA","Client Engagement NDA","Approved Mutual NDA template derived from the complete parameterized Client Engagement Agreement / NDA pack.","nda",json.dumps(NDA_SCHEMA),NDA_BODY,now,"1.7.1",json.dumps({"source":"Parameterized Client Engagement NDA pack","shell":"VTAB Square / Siroco","page_size":"A4"})),
     ]
     docs.extend(
         (
             item["code"], item["name"], item["description"], "engagement",
-            json.dumps(item["schema"]), item["body"], now, "1.7.0",
+            json.dumps(item["schema"]), item["body"], now, "1.7.1",
             json.dumps({"source": item["source"], "shell": "VTAB Square / Siroco", "page_size": "A4", "content_policy": "source-faithful"}),
         )
         for item in ADDITIONAL_TEMPLATES
