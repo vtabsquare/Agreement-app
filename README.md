@@ -1,129 +1,96 @@
-# Aurelia Contract Studio V1.3
+# Aurelia Contract Studio V1.7
 
-Premium local Contract & Agreement Management starter built for VS Code.
+A local-first agreement generator built around the approved Policy, NDA and engagement templates supplied for this project.
 
-## One-command launch
+## Approved Templates
 
-After extracting the project and opening the `agreement-studio` folder in VS Code, run only:
+1. **Policy Agreement** - based on the supplied VTAB Square Policy Agreement PDF.
+2. **Client Engagement NDA** - based on the full parameterized Client Engagement Agreement and NDA pack, with the non-variable document used as a wording check.
+3. **Client Engagement Agreement** - the original Client Engagement / Master Services Agreement content.
+4. **Statement of Work** - the original common SOW content and signature table.
+5. **Fixed Bid Commercial Schedule** - the original fixed bid content and commercial table.
+6. **Time and Material Commercial Schedule** - the original T&M content and commercial table.
+7. **Milestone Based Commercial Schedule** - the original milestone content and milestone table.
+8. **Mixed Project Commercial Schedule** - the original mixed-project content and workstream table.
+9. **Change Request** - the original request, impact-assessment and approval content.
+10. **Milestone Deliverable Acceptance** - the original acceptance content and signature table.
+11. **Project Engagement Closure** - the original closure checklist, confirmation and signature content.
+
+Each template owns its complete field schema. Selecting a template shows only the variables present in that source document. Company and Client Master values are prefilled where possible, but every field remains visible and editable.
+
+The nine engagement additions preserve the supplied paragraph wording, heading order, lists, table rows, table cells, signatures and every unique `{{VARIABLE}}` occurrence. The application adds the existing VTAB/Siroco cover and Contact Us page around that source content.
+
+Every approved document now has independent clause numbering. A document begins at **1.**, and its subsections continue as **1.1, 1.2, 1.3...** instead of inheriting section numbers from the original multi-document pack.
+
+## Digital signatures
+
+The **Signatures** section provides two reusable capture methods:
+
+- Draw a signature in the application and save it with a recognizable name.
+- Upload a PNG, JPEG or WebP signature image and save it to the library.
+
+Saved signatures appear in dropdowns for every template signature slot. Users may instead upload a one-time signature image directly in a document field. The selected image is embedded in the WYSIWYG preview and the exported PDF. Removing a saved library item does not alter documents that already contain that image.
+
+## Policy Agreement fields
+
+The Policy template exposes recipient name, agreement date, optional photo, internship/training/probation/post-probation periods and amounts, work hours and setup, leave and LOP terms, salary-credit day, resignation thresholds, notice and penalties, example values, signatory details and an optional reusable digital signature.
+
+The static body follows the supplied reference wording and is laid out across the same cover, two content pages and final contact page as the supplied PDF.
+
+## Complete NDA fields
+
+V1.7 exposes the complete NDA inputs in usable groups:
+
+- Service Provider legal name, brand name, registered address, registration/CIN number, tax ID and notice email.
+- Client legal and display names, registered address, registration number, tax ID, primary contact name/email and notice email.
+- NDA effective/end dates, purpose and confidentiality term.
+- Governing law, dispute-resolution method and dispute venue/seat.
+- Both authorized signatory names, titles, signature dates and reusable digital-signature selections.
+
+The variables are derived from the parameterized source pack rather than a reduced manual subset.
+
+## Template actions and versioning
+
+Each stored template has visible **View**, **Edit** and **Use** actions. View opens a page-by-page PDF preview of the stored shell. Edit changes content and variable definitions while the VTAB/Siroco branded shell remains locked. **Reset to built-in** restores the V1.7 source definition.
+
+Template records store their revision, built-in version, update time, source metadata and customized/original status. All eleven approved built-in templates remain active.
+
+## WYSIWYG PDF workflow
+
+```text
+Approved template
+      -> complete template-specific fields
+      -> unresolved-field check
+      -> branded page-by-page final preview
+      -> optional Edit Final Content
+      -> save/version
+      -> export the same branded PDF
+```
+
+The final on-screen preview is produced by the same ReportLab renderer as PDF export. It is not a generic rich-text card. Every approved template uses the Policy reference framework:
+
+- A4 navy cover with contact details, VTAB Square and Siroco lockup, PREPARED FOR, document title and white confidentiality strip.
+- White content pages with the same navy header band, contact block, lockup, navy footer, Siroco mark and page number.
+- Final Contact Us page with USA red, INDIA orange and MENA green sections plus navy footer.
+
+Missing required values are listed by field name and block document creation/export until resolved.
+
+## Run locally
+
+From the project root:
 
 ```powershell
 python run.py
 ```
 
-`run.py` is the primary launcher. It handles the local environment automatically:
+The launcher supports Python 3.14, checks dependencies, starts FastAPI and Vite, and opens the application. Press **Ctrl+C** once to stop both services.
 
-1. Checks that the project is complete.
-2. Checks the current Python version (Python 3.10+ required; 3.11+ recommended).
-3. Creates `backend/.venv` only when it does not already exist.
-4. Checks `backend/requirements.txt` and installs Python packages only when required.
-5. Checks for Node.js and npm.
-6. If a suitable Node.js/npm installation is already available, it reuses it.
-7. If Node.js/npm is missing or too old, it downloads an official **portable Node.js runtime** into `.runtime/` inside this project instead of modifying your system installation.
-8. Checks frontend package metadata and runs `npm install` only when dependencies are missing or changed.
-9. Starts FastAPI on `http://127.0.0.1:8000`.
-10. Starts the React/Vite application on `http://127.0.0.1:5173`.
-11. Opens the application automatically in your default browser.
-12. Pressing `Ctrl+C` stops both services.
+## Existing V1.x database
 
-On the first run, internet access is required if Python packages, frontend packages, or the portable Node.js runtime have not already been installed. Later launches reuse the existing environment wherever possible.
+Uncustomized built-ins are upgraded to V1.7 automatically. User-customized templates remain intact and can be restored explicitly with **Reset to built-in**. Existing agreement history, generated content, versions, status, audit records and PDF export remain available.
 
-> The launcher itself is a Python file, so Python must already be installed before `python run.py` can execute. If the detected Python version is unsupported, the launcher gives a clear installation instruction instead of modifying the operating system automatically.
+## Environment safety
 
-## Environment-file safety
-
-This package intentionally contains **no `.env` file**. It contains `.env.example` only.
-
-`run.py`:
-
-- never creates `.env`;
-- never copies `.env.example` to `.env`;
-- never overwrites `.env`;
-- never deletes `.env`.
-
-Your own local `.env` therefore remains untouched between application upgrades.
-
-## Included
-
-- FastAPI + SQLite backend
-- React + TypeScript + Vite frontend
-- Premium responsive light/dark interface
-- Dashboard and agreement pipeline
-- Dynamic company master
-- Dynamic client/vendor master
-- Client, Vendor, NDA and Custom templates
-- **Working Create Template flow** with create, edit and archive actions
-- **Master template editor** with placeholder-token picker
-- Template-defined dynamic fields: text, multiline, date, number, currency and select
-- Required/optional template-field validation and defaults
-- Duplicate and undefined-placeholder checks
-- **Template-aware agreement wizard**: selecting an NDA/client/vendor template automatically generates the fields that template requires
-- Automatic company/party/system placeholders such as `{{OUR_COMPANY_LEGAL_NAME}}`, `{{PARTY_LEGAL_NAME}}`, `{{SCOPE}}`, `{{DELIVERABLES}}` and `{{COMMERCIAL_TERMS}}`
-- Live render endpoint and unresolved-placeholder blocking before finalization
-- **Final live agreement editor** after placeholder substitution; manual edits are agreement-specific
-- Reset/re-render from master template + current field values
-- Explicit **Save as template** action only when the user intentionally wants final agreement wording to replace the master template content
-- Fixed Bid, Milestone Based, Time & Material and Hybrid commercial models
-- Dynamic deliverables
-- Milestone 100% validation
-- Version/audit scaffolding
-- Voice input through browser Speech Recognition where supported
-- Local AI-assistant mock endpoint with clean provider hook point
-- PDF generation from FastAPI using ReportLab
-- Agreement numbering `AGR-YYYY-0001`
-
-
-## V1.3 template workflow
-
-1. Open **Templates** and choose **Create template**.
-2. Define the master legal text and add placeholders such as `{{AGREEMENT_DATE}}`, `{{PURPOSE}}` or `{{CONFIDENTIALITY_PERIOD}}`.
-3. Define the corresponding dynamic fields and whether each field is required.
-4. While creating an agreement, select that template. The next wizard step is generated from the template field schema automatically.
-5. Enter the requested values. The application substitutes them together with company, counterparty, scope, deliverables and commercial data.
-6. The last wizard step shows the rendered agreement in the **Live Agreement Editor**. Edit any wording manually before creating the agreement.
-7. Agreement-specific edits do not update the source/master template. Updating the master requires the explicit **Save as template** action.
-8. Agreements with unresolved `{{PLACEHOLDER}}` tokens cannot be finalized.
-
-The seeded Mutual NDA demonstrates this workflow with agreement date, purpose, representatives, confidentiality period and governing-law fields.
-
-## Local addresses
-
-- Application: `http://127.0.0.1:5173`
-- Backend API: `http://127.0.0.1:8000`
-- FastAPI Swagger: `http://127.0.0.1:8000/docs`
-
-## Local database
-
-`backend/agreement_studio.db` is created automatically at first backend launch and is excluded from Git.
-
-## AI integration
-
-The AI screen currently calls `/api/ai`, which is a local mock so the application works without secret keys. Replace the provider implementation later with OpenAI, Azure OpenAI, or another approved provider. Store credentials in your own `.env`; never commit secrets.
-
-## Existing company agreement templates
-
-The backend seeds placeholder-based templates including:
-
-- `{{OUR_COMPANY_LEGAL_NAME}}`
-- `{{PARTY_LEGAL_NAME}}`
-- `{{SCOPE}}`
-- `{{DELIVERABLES}}`
-- `{{COMMERCIAL_TERMS}}`
-
-Your existing approved company agreements can later be converted into these reusable templates without changing the agreement-creation workflow.
-
-## Production path
-
-The frontend and backend are separated intentionally so they can later be deployed independently. For production, replace SQLite with PostgreSQL, restrict CORS origins, add authentication/RBAC, move secrets to your deployment environment, and connect approved AI, digital-signature, email, and notification services.
-
-## Legacy launchers
-
-The old `.bat` launchers are retained only as fallback helpers for Windows. For normal use, use:
-
-```powershell
-python run.py
-```
-
-
-## Python 3.14 compatibility
-
-V1.2 uses FastAPI/Pydantic versions with native CPython 3.14 Windows wheels. `run.py` detects an incomplete or mismatched `backend/.venv`, rebuilds it automatically, and retries backend dependency installation once. You do not need Rust or Visual Studio Build Tools for the normal setup.
+- `.env` is never created, copied, replaced or overwritten.
+- No `.env` file is included in the release.
+- `.venv`, `.runtime`, `.launcher`, `node_modules`, local databases, generated PDFs and other runtime content are excluded from the release ZIP.
