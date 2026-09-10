@@ -59,8 +59,13 @@ app.add_middleware(
 def db():
     if not DATABASE_URL:
         raise HTTPException(503, "Database is not configured. Set the DATABASE_URL environment variable.")
-    c = psycopg2.connect(DATABASE_URL)
-    return c
+    try:
+        c = psycopg2.connect(DATABASE_URL)
+        return c
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).error("Database connection failed: %s", e)
+        raise HTTPException(500, f"Database connection failed: {e}")
 
 
 def ensure_column(conn, table: str, column: str, definition: str):
