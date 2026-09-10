@@ -48,6 +48,8 @@ app.add_middleware(
 
 
 def db():
+    if not DATABASE_URL:
+        raise HTTPException(503, "Database is not configured. Set the DATABASE_URL environment variable.")
     c = psycopg2.connect(DATABASE_URL)
     return c
 
@@ -310,7 +312,18 @@ def init_db():
     conn.close()
 
 
-init_db()
+if DATABASE_URL:
+    try:
+        init_db()
+    except Exception as _init_err:
+        import logging
+        logging.getLogger(__name__).error("init_db() failed: %s", _init_err)
+else:
+    import logging
+    logging.getLogger(__name__).warning(
+        "DATABASE_URL is not set — skipping database initialisation. "
+        "Set DATABASE_URL in the Render environment variables."
+    )
 
 
 class CompanyIn(BaseModel):
